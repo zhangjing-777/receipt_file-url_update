@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from main import upload_file_to_storage, update_file_url
 
 
@@ -25,6 +26,15 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 
+origins = ["https://receiptdrop.dev"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,         
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/webhook/modify_url")
 async def modify_url(
