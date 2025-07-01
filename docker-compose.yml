@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  modify-url-api:
+    build: .
+    container_name: modify-url-api
+    ports:
+      - "8008:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+      
